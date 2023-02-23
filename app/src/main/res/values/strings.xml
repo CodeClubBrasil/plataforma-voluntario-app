@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Code Club Brasil</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="spinnerEstado">Espaço para selecionar seu Estado</string>
+    <string name="espacoNome">NOME:</string>
+    <string name="espacoSobrenome">SOBRENOME:</string>
+    <string name="espacoCidade">CIDADE:</string>
+    <string name="logoCodeClub">Logotipo do Code Club</string>
+    <string name="textVoluntario">JÁ É VOLUNTÁRIO?</string>
+    <string name="codeclubbrasil">Code Club Brasil</string>
+    <string name="bemvindoaoclub">Bem vindo ao</string>
+    <string name="botaocadastrar">Cadastrar</string>
+    <string name="entrar"> ENTRAR</string>
+    <string name="espacoTelefone">TELEFONE::</string>
+    <string name="espacoEmail">E-MAIL:</string>
+    <string name="espacoSenha">SENHA:</string>
+    <string name="botaoContinuar">Continuar</string>
+    <string name="termosCondicoes">Ao se cadastrar, você concorda com nossos</string>
+    <string name="termosCondicoes2"> Termos e condições.</string>
+    <string name="botaoEntrar">JÁ É VOLUNTÁRIO? ENTRAR</string>
+</resources>
