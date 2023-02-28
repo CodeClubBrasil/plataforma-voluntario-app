@@ -16,5 +16,11 @@ class MainActivity : AppCompatActivity() {
         cadastrar.setOnClickListener { val intent = Intent (this, Cadastro::class.java)
             startActivity(intent) }
 
+
+        val entrar: Button = findViewById(R.id.botaoEntrar)
+
+        entrar.setOnClickListener { val intent = Intent(this, Login::class.java)
+        startActivity(intent) }
+
     }
 }

@@ -1,11 +1,8 @@
 package com.example.codeclubapp
 
-import android.graphics.Typeface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
@@ -20,6 +17,15 @@ class Cadastro : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, estados)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         stateSpinner.adapter = adapter
+
+        val continuar: Button = findViewById(R.id.botaoContinuar)
+
+        continuar.setOnClickListener { val intent = Intent (this, Cadastro2::class.java)
+            startActivity(intent) }
+
+        val entrar: Button = findViewById(R.id.botaoEntrar)
+        entrar.setOnClickListener { val intent = Intent (this, Login::class.java)
+        startActivity(intent) }
 
     }
 }

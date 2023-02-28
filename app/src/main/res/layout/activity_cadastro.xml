@@ -6,182 +6,186 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="#070707"
-    tools:context=".Cadastro">
-    
-    <TextView
-        android:id="@+id/textCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="69dp"
-        android:text="@string/cadastro"
-        android:textColor="@color/black"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:ems="7"
-        android:hint="@string/espacoNome"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextSobrenome"
-        app:layout_constraintEnd_toStartOf="@+id/editTextSobrenome"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="25dp"
-        android:autofillHints="phone"
-        android:ems="15"
-        android:hint="@string/espacoTelefone"
-        android:inputType="phone"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCidade" />
-
-    <EditText
-        android:id="@+id/editTextCidade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="27dp"
-        android:autofillHints="addressCity"
-        android:ems="7"
-        android:hint="@string/espacoCidade"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/stateSpinner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
-
-    <EditText
-        android:id="@+id/editTextSobrenome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:autofillHints="surname"
-        android:ems="7"
-        android:hint="@string/espacoSobrenome"
-        android:inputType="textPersonName"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextNome"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/stateSpinner"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="73dp"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="73dp"
-        android:backgroundTint="#000000"
-        android:contentDescription="@string/spinnerEstado"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTelefone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editTextCidade"
-        app:layout_constraintTop_toTopOf="@+id/editTextSobrenome" />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:autofillHints="emailAddress"
-        android:ems="15"
-        android:hint="@string/espacoEmail"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextTelefone"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone" />
-
-    <EditText
-        android:id="@+id/editTextSenha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:autofillHints="password"
-        android:ems="15"
-        android:hint="@string/espacoSenha"
-        android:inputType="textPassword"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/botaoContinuar"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textTermos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSenha" />
-
-
-    <TextView
-        android:id="@+id/textTermosCondicoes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/termosCondicoes2"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textTermos"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <TextView
-        android:id="@+id/textTermos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/termosCondicoes"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/textTermosCondicoes"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/botaoEntrar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/botaoEntrar"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="#070707"
+        tools:context=".Cadastro">
+
+        <TextView
+            android:id="@+id/textCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/cadastro"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="35dp"
+            android:autofillHints="name"
+            android:ems="7"
+            android:hint="@string/espacoNome"
+            android:inputType="textPersonName"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCadastro" />
+
+        <EditText
+            android:id="@+id/editTextTelefone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="phone"
+            android:ems="15"
+            android:hint="@string/espacoTelefone"
+            android:inputType="phone"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextCidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="addressCity"
+            android:ems="7"
+            android:hint="@string/espacoCidade"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTelefone"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextSobrenome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="30dp"
+            android:autofillHints="surname"
+            android:ems="7"
+            android:hint="@string/espacoSobrenome"
+            android:inputType="textPersonName"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCadastro" />
+
+        <Spinner
+            android:id="@+id/stateSpinner"
+            android:layout_width="186dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#000000"
+            android:contentDescription="@string/spinnerEstado"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/editTextTelefone"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="emailAddress"
+            android:ems="15"
+            android:hint="@string/espacoEmail"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextSenha"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:autofillHints="password"
+            android:ems="15"
+            android:hint="@string/espacoSenha"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/botaoContinuar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/botaoContinuar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/botaoContinuar"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/textTermos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textTermosCondicoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="120dp"
+            android:text="@string/termosCondicoes2"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textTermos" />
+
+        <TextView
+            android:id="@+id/textTermos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="120dp"
+            android:text="@string/termosCondicoes"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
+            app:layout_constraintEnd_toStartOf="@+id/textTermosCondicoes"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/botaoEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="665dp"
+            android:text="@string/botaoEntrar"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

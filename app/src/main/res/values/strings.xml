@@ -11,6 +11,7 @@
     <string name="bemvindoaoclub">Bem vindo ao</string>
     <string name="botaocadastrar">Cadastrar</string>
     <string name="entrar"> ENTRAR</string>
+    <string name="textEntrar">Entrar</string>
     <string name="espacoTelefone">TELEFONE::</string>
     <string name="espacoEmail">E-MAIL:</string>
     <string name="espacoSenha">SENHA:</string>
@@ -18,4 +19,14 @@
     <string name="termosCondicoes">Ao se cadastrar, você concorda com nossos</string>
     <string name="termosCondicoes2"> Termos e condições.</string>
     <string name="botaoEntrar">JÁ É VOLUNTÁRIO? ENTRAR</string>
+    <string name="textFotoPerfil">Foto do perfil</string>
+    <string name="botaoNovaFoto">Enviar nova</string>
+    <string name="descricaoImagem">Foto de perfil</string>
+    <string name="textAnexarDocumento">Anexar Documento</string>7
+    <string name="textAntecedentesCriminais">Antecedentes Criminais</string>
+    <string name="botaoEnviarArquivo">Enviar Arquivo</string>
+    <string name="botaoFinalizar">Finalizar</string>
+    <string name="botaoAindaNaoTemCadastro">Ainda não tem cadastro?</string>
+
+
 </resources>
