@@ -27,6 +27,12 @@
     <string name="botaoEnviarArquivo">Enviar Arquivo</string>
     <string name="botaoFinalizar">Finalizar</string>
     <string name="botaoAindaNaoTemCadastro">Ainda não tem cadastro?</string>
+    <string name="stringOlaUsuario">Olá, Voluntário!</string>
+    <string name="botaoBuscarCodeClub">Buscar Code Clubs</string>
+    <string name="botaoCriarCodeClub">Criar um novo Code Club</string>
+    <string name="botaoTreinamentos">Treinamentos</string>
+    <string name="botaoComunidade">Comunidade</string>
+    <string name="botaoSair">Sair</string>
 
 
 </resources>

@@ -14,5 +14,9 @@ class Login : AppCompatActivity() {
         fazercadastro.setOnClickListener { val intent = Intent (this, Cadastro::class.java)
         startActivity(intent)}
 
+        val continuarlogin: Button = findViewById(R.id.botaoContinuarLogin)
+        continuarlogin.setOnClickListener { val intent = Intent (this, Logado::class.java)
+        startActivity(intent)}
+
     }
 }

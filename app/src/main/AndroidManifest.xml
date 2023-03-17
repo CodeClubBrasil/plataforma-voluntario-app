@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CodeClubApp"
         tools:targetApi="31">
         <activity
+            android:name=".Logado"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
