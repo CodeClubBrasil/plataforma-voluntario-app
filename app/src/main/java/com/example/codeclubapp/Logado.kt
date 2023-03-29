@@ -14,5 +14,9 @@ class Logado : AppCompatActivity() {
         botaosair.setOnClickListener { val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)}
 
+        val editarperfil: Button = findViewById(R.id.buttonEditarPerfil)
+        editarperfil.setOnClickListener { val intent = Intent(this,Perfil::class.java)
+        startActivity(intent)}
+
     }
 }

@@ -33,6 +33,11 @@
     <string name="botaoTreinamentos">Treinamentos</string>
     <string name="botaoComunidade">Comunidade</string>
     <string name="botaoSair">Sair</string>
+    <string name="textoPerfil">Perfil</string>
+    <string name="botaoDisponibilidade">Escala de disponibilidade</string>
+    <string name="botaoAlteraSenha">Alterar senha</string>
+    <string name="botaoRemoverCadastro">Remover cadastro</string>
+    <string name="botaoEditarPerfil">Editar perfil</string>
 
 
 </resources>
