@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         val cadastrar: Button = findViewById(R.id.botaoCadastrar)
 
         cadastrar.setOnClickListener { val intent = Intent (this, Cadastro::class.java)
