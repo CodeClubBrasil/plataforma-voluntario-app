@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.codeclubapp.databinding.ActivityMainBinding
 import com.example.codeclubapp.src.ui.viewmodel.MainActivityViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    //erro
-    private val viewModel: MainActivityViewModel by viewModels<MainActivityViewModel>()
+    /*
+    * Para funcionar o by viewModels() é preciso adicionar a dependencia do fragment ktx
+    * */
+    private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.mostrarTexto()
         viewModel.texto.observe(this) { _text ->
-            Toast.makeText(this, _text, Toast.LENGTH_LONG)
         }
 
         /*DEVELOPMENT BRANCH */
