@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         /*DEVELOPMENT BRANCH */
-        val cadastrar: Button = findViewById(R.id.botaoCadastrar)
+        val novoBotao: Button = findViewById(R.id.botaoCadastrar)
 
-        cadastrar.setOnClickListener { val intent = Intent (this, Cadastro::class.java)
+        novoBotao.setOnClickListener { val intent = Intent (this, Cadastro::class.java)
             startActivity(intent) }
 
 
