@@ -11,7 +11,7 @@ class MainActivityViewModel() : ViewModel() {
     val texto = MutableLiveData<String>()
 
     fun mostrarTexto() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             texto.value = "Teste"
         }
     }
