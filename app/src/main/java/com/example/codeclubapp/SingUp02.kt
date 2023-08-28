@@ -3,7 +3,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 
-class Cadastro2 : AppCompatActivity() {
+class SingUp02 : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
