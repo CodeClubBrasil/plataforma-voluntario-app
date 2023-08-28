@@ -8,9 +8,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import com.example.codeclubapp.databinding.ActivityLoginBinding
-import com.example.codeclubapp.databinding.ActivityMainBinding
-import com.example.codeclubapp.src.classesModelos.user.User
-import com.example.codeclubapp.src.utilidades.mostratToast
+import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
+
 const val TAG = "TAG"
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -19,12 +18,15 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val userA = User(name = "Pedro", password = "1234")
-        val userB = User(name = "William", password = "1234")
-        val listaLoginFake = mutableListOf<User>(User())
-        listaLoginFake.addAll(listOf(userA, userB))
-        Log.i(TAG, "A listaFake é:  $listaLoginFake")
+        /*
+        val userCodeClubA = UserCodeClub(name = "Pedro", password = "1234")
+        val userCodeClubB = UserCodeClub(name = "William", password = "1234")
+        val listaLoginFake = mutableListOf<UserCodeClub>(UserCodeClub())
 
+
+        listaLoginFake.addAll(listOf(userCodeClubA, userCodeClubB))
+        Log.i(TAG, "A listaFake é:  $listaLoginFake")
+         */
 
         var nome = ""
         var senha = ""
@@ -52,10 +54,10 @@ class Login : AppCompatActivity() {
 
         val fazercadastro: Button = findViewById(R.id.botaoFazerCadastro)
         fazercadastro.setOnClickListener {
-            val intent = Intent(this, Cadastro::class.java)
+            val intent = Intent(this, SignUp01::class.java)
             startActivity(intent)
         }
-
+/*
         val continuarlogin: Button = findViewById(R.id.botaoContinuarLogin)
         continuarlogin.setOnClickListener {
             val usuarioEncontrado = listaLoginFake.find {
@@ -65,8 +67,9 @@ class Login : AppCompatActivity() {
                 val intent = Intent(this, Logado::class.java)
                 startActivity(intent)
             } else {
-                mostratToast(this,"Usuário não encontrado")
+                showToast(this,"Usuário não encontrado")
             }
         }
+        */
     }
 }
