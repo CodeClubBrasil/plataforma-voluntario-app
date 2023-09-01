@@ -12,11 +12,11 @@
     <string name="botaocadastrar">Cadastrar</string>
     <string name="entrar"> ENTRAR</string>
     <string name="textEntrar">Entrar</string>
-    <string name="espacoTelefone">TELEFONE::</string>
+    <string name="espacoTelefone">TELEFONE:</string>
     <string name="espacoEmail">E-MAIL:</string>
     <string name="espacoSenha">SENHA:</string>
     <string name="botaoContinuar">Continuar</string>
-    <string name="termosCondicoes">Ao se cadastrar, você concorda com nossos</string>
+    <string name="termosCondicoes">Ao se cadastrar, você concorda com nossos </string>
     <string name="termosCondicoes2"> Termos e condições.</string>
     <string name="botaoEntrar">JÁ É VOLUNTÁRIO? ENTRAR</string>
     <string name="textFotoPerfil">Foto do perfil</string>
@@ -38,6 +38,8 @@
     <string name="botaoAlteraSenha">Alterar senha</string>
     <string name="botaoRemoverCadastro">Remover cadastro</string>
     <string name="botaoEditarPerfil">Editar perfil</string>
+    <string name="bairro">BAIRRO:</string>
+    <string name="conhecimento">CONHECIMENTO:</string>
 
 
 </resources>

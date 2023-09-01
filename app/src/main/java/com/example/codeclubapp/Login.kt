@@ -18,15 +18,15 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*
-        val userCodeClubA = UserCodeClub(name = "Pedro", password = "1234")
-        val userCodeClubB = UserCodeClub(name = "William", password = "1234")
-        val listaLoginFake = mutableListOf<UserCodeClub>(UserCodeClub())
 
+//        val userCodeClubA = UserCodeClub(name = "Pedro", password = "1234")
+//        val userCodeClubB = UserCodeClub(name = "William", password = "1234")
+//        val listaLoginFake = mutableListOf<UserCodeClub>(UserCodeClub())
+//
+//
+//        listaLoginFake.addAll(listOf(userCodeClubA, userCodeClubB))
+//        Log.i(TAG, "A listaFake é:  $listaLoginFake")
 
-        listaLoginFake.addAll(listOf(userCodeClubA, userCodeClubB))
-        Log.i(TAG, "A listaFake é:  $listaLoginFake")
-         */
 
         var nome = ""
         var senha = ""

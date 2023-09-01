@@ -19,5 +19,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnSignUp.setOnClickListener {
             startActivity(Intent(this, SignUp01::class.java))
         }
+
+        binding.botaoEntrar.setOnClickListener {
+            startActivity(Intent(this,Login::class.java))
+        }
     }
 }
