@@ -41,5 +41,8 @@
     <string name="bairro">BAIRRO:</string>
     <string name="conhecimento">CONHECIMENTO:</string>
 
+    <string name="btnFotoTeste">SELECIONAR FOTO:</string>
+    <string name="btnByteArray">SALVAR BYTE ARRAY:</string>
+
 
 </resources>
