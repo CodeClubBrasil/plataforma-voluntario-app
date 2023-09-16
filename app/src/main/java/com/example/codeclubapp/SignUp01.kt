@@ -1,6 +1,8 @@
 package com.example.codeclubapp
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,14 +19,21 @@ import com.example.codeclubapp.src.classesModelos.user.DAYS
 import com.example.codeclubapp.src.classesModelos.user.Knowledges
 import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
 import com.example.codeclubapp.src.ui.viewmodel.SignUpViewModel
-import com.example.codeclubapp.src.utils.CC_Utils
+import com.example.codeclubapp.src.utils.CCUtils
+import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.sign
 
 class SignUp01 : AppCompatActivity() {
 
 
     private val signUpViewModel: SignUpViewModel by viewModel()
     private lateinit var binding: ActivitySignUp01Binding
+    private var bitmapImgSelected: Bitmap? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +61,30 @@ class SignUp01 : AppCompatActivity() {
             val knowledges = binding.editTextKnowledge.text.toString()
 
             Log.i(TAG, " Salvando usuario de nome: $name $lastName e city: $city ")
-            CC_Utils.showToast(this,"Usuario $name cadastrado com sucesso")
-            saveUserOnDatabase(name,lastName,password,city,state,neighborhood,tels,email, knowledges)
+            CCUtils.showToast(this, "Usuario $name cadastrado com sucesso")
+            saveUserOnDatabase(
+                name,
+                lastName,
+                password,
+                city,
+                state,
+                neighborhood,
+                tels,
+                email,
+                knowledges
+            )
         }
 
         val entrar: Button = findViewById(R.id.botaoEntrar)
         entrar.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
+
+        binding.btnFotoTeste.setOnClickListener {
+            pickPhoto()
+
+        }
+
 
     }
 
@@ -71,8 +96,8 @@ class SignUp01 : AppCompatActivity() {
         city: String,
         state: String,
         neighborhood: String,
-        tels:String,
-        email:String,
+        tels: String,
+        email: String,
         knowledges: String,
     ) {
         val userAddress = Address(city, state, neighborhood)
@@ -94,5 +119,35 @@ class SignUp01 : AppCompatActivity() {
             Knowledges(knowledges)
         )
         signUpViewModel.insertNewUser(user)
+    }
+
+    private fun pickPhoto() {
+        val i = Intent()
+        i.setType("image/**")
+        i.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(i, 200)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 200) {
+                val selectedUri: Uri? = data?.data
+                selectedUri.let {
+                    GlobalScope.launch(Dispatchers.IO) {
+                        val bitmap = Picasso.get().load(it).get()
+                        // Agora você pode usar o bitmap sem bloquear a thread principal
+                        withContext(Dispatchers.Main) {
+                            binding.imgTeste.setImageBitmap(bitmap)
+                            signUpViewModel.getByteArrayFromImg(bitmap).also {
+                                signUpViewModel._byteArrayImg.observe(this@SignUp01){
+                                    binding.txtByteArray.text = it.toString()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
