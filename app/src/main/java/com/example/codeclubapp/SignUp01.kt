@@ -33,7 +33,7 @@ class SignUp01 : AppCompatActivity() {
 
     private val signUpViewModel: SignUpViewModel by viewModel()
     private lateinit var binding: ActivitySignUp01Binding
-    private var bitmapImgSelected: Bitmap? = null
+    private var byteArrayImg: ByteArray? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,10 +82,7 @@ class SignUp01 : AppCompatActivity() {
 
         binding.btnFotoTeste.setOnClickListener {
             pickPhoto()
-
         }
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -128,20 +125,26 @@ class SignUp01 : AppCompatActivity() {
         startActivityForResult(i, 200)
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             if (requestCode == 200) {
                 val selectedUri: Uri? = data?.data
+                //setando imagem
+                binding.imgTeste.setImageURI(selectedUri)
+                //salvando bytearray da imagem
                 selectedUri.let {
                     GlobalScope.launch(Dispatchers.IO) {
+                        //setando a imagem de URI pra Bitmap
                         val bitmap = Picasso.get().load(it).get()
-                        // Agora você pode usar o bitmap sem bloquear a thread principal
                         withContext(Dispatchers.Main) {
-                            binding.imgTeste.setImageBitmap(bitmap)
+                            //recuperando o bytearray do bitmap
                             signUpViewModel.getByteArrayFromImg(bitmap).also {
-                                signUpViewModel._byteArrayImg.observe(this@SignUp01){
+                                //salvando na variavel byteArrayImg o bytearray do bitmap
+                                signUpViewModel.byteArrayImg.observe(this@SignUp01){
                                     binding.txtByteArray.text = it.toString()
+                                    byteArrayImg = it
                                 }
                             }
                         }

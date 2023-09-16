@@ -220,16 +220,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnSalvarByteArray"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:text="@string/btnByteArray"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
             <TextView
                 android:id="@+id/txtByteArray"
                 android:layout_width="match_parent"

@@ -24,11 +24,12 @@ class CCUtils {
         fun getBytesFromImage(bitmap: Bitmap): ByteArray {
             val stream = ByteArrayOutputStream()
             bitmap.compress(CompressFormat.PNG, 0, stream)
+            stream.close()
             return stream.toByteArray()
         }
 
         // convert byte array to bitmap
-        suspend fun getImageFromByteArray(bytes:ByteArray) : Bitmap {
+        fun getImageFromByteArray(bytes:ByteArray) : Bitmap {
             return BitmapFactory.decodeByteArray(bytes,0, bytes.size)
         }
     }

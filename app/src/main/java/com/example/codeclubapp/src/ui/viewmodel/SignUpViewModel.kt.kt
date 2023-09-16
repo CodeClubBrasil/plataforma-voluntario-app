@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class SignUpViewModel(private val userDaoImpl: UserDaoImpl) : ViewModel() {
 
-    var _byteArrayImg = MutableLiveData<ByteArray>()
+    private var _byteArrayImg = MutableLiveData<ByteArray>()
+    val byteArrayImg: LiveData<ByteArray> = _byteArrayImg
 
     fun insertNewUser(userCodeClub: UserCodeClub) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -27,11 +28,7 @@ class SignUpViewModel(private val userDaoImpl: UserDaoImpl) : ViewModel() {
         }
     }
 
-    fun getBitmapFromByteArray(byteArray: ByteArray) {
-        CoroutineScope(Dispatchers.IO).launch {
-            CCUtils.getImageFromByteArray(byteArray).also {
-                //TODO
-            }
-        }
+    fun getBitmapFromByteArray(byteArray: ByteArray): Bitmap {
+        return CCUtils.getImageFromByteArray(byteArray)
     }
 }
