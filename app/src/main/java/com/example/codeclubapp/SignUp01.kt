@@ -79,10 +79,6 @@ class SignUp01 : AppCompatActivity() {
         entrar.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
-
-        binding.btnFotoTeste.setOnClickListener {
-            pickPhoto()
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -118,39 +114,7 @@ class SignUp01 : AppCompatActivity() {
         signUpViewModel.insertNewUser(user)
     }
 
-    private fun pickPhoto() {
-        val i = Intent()
-        i.setType("image/**")
-        i.setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(i, 200)
-    }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 200) {
-                val selectedUri: Uri? = data?.data
-                //setando imagem
-                binding.imgTeste.setImageURI(selectedUri)
-                //salvando bytearray da imagem
-                selectedUri.let {
-                    GlobalScope.launch(Dispatchers.IO) {
-                        //setando a imagem de URI pra Bitmap
-                        val bitmap = Picasso.get().load(it).get()
-                        withContext(Dispatchers.Main) {
-                            //recuperando o bytearray do bitmap
-                            signUpViewModel.getByteArrayFromImg(bitmap).also {
-                                //salvando na variavel byteArrayImg o bytearray do bitmap
-                                signUpViewModel.byteArrayImg.observe(this@SignUp01){
-                                    binding.txtByteArray.text = it.toString()
-                                    byteArrayImg = it
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+
 }
