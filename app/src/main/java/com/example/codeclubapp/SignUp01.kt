@@ -27,6 +27,7 @@ class SignUp01 : AppCompatActivity() {
 
     private val signUpViewModel: SignUpViewModel by viewModel()
     private lateinit var binding: ActivitySignUp01Binding
+    private var byteArrayImg: ByteArray? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +59,6 @@ class SignUp01 : AppCompatActivity() {
                 val estadoSelecionado = estados[position]
                 stateSelected = estadoSelecionado
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
@@ -109,7 +109,6 @@ class SignUp01 : AppCompatActivity() {
         entrar.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
-
     }
 
     private fun validaFormulario(
@@ -188,4 +187,8 @@ class SignUp01 : AppCompatActivity() {
         )
         signUpViewModel.insertNewUser(user)
     }
+
+
+
+
 }
