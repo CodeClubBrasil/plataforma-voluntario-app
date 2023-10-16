@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
 import com.example.codeclubapp.src.db.user.UserCodeClubeDAO
 
-@Database(entities = [UserCodeClub::class], version = 2)
+@Database(entities = [UserCodeClub::class], version = 3)
 abstract class DatabaseManager : RoomDatabase() {
     abstract fun userDAO(): UserCodeClubeDAO
 }

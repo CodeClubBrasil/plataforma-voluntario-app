@@ -10,7 +10,7 @@ import android.widget.Button
 import com.example.codeclubapp.databinding.ActivityLoginBinding
 import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
 
-const val TAG = "TAG"
+private const val TAG = "TAG"
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {

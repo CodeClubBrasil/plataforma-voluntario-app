@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "cc_tbl_user")
 data class UserCodeClub(
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     var name: String? = null,
     var lastName: String? = null,
     private var password: String? = null,

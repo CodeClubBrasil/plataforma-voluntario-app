@@ -1,12 +1,7 @@
 package com.example.codeclubapp.src.utils
 
 import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.widget.Toast
-import com.example.codeclubapp.TAG
-import org.w3c.dom.Text
 
 class CC_Utils {
     companion object {

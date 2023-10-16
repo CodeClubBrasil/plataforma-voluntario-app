@@ -2,6 +2,7 @@
 <resources>
 
     <string-array name="siglasEstados">
+        <item> </item>
         <item>AC</item>
         <item>AL</item>
         <item>AP</item>
