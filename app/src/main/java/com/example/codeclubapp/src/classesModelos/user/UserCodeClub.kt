@@ -12,7 +12,7 @@ data class UserCodeClub(
     private var password: String? = null,
     @Embedded var address: Address?,
     @Embedded var contacts: Contacts?,
-    @Embedded var avaiableTime: AvaiableTime?,
+    @Embedded var roomDBAvaiableTime: RoomDBAvaiableTime?,
     @Embedded var knowledges: Knowledges?
 ){
     fun setPassword(password: String?){

@@ -1,4 +1,4 @@
-package com.example.codeclubapp.src.retrofit.modelosResposta
+package com.example.codeclubapp.src.retrofit.dto
 
 
 data class Address (

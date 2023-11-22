@@ -1,7 +1,7 @@
 package com.example.codeclubapp.src.retrofit
 
 import android.util.Log
-import com.example.codeclubapp.src.retrofit.modelosResposta.CodeClubs
+import com.example.codeclubapp.src.retrofit.dto.CodeClubs
 import java.lang.Exception
 
 class WebClient {

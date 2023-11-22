@@ -9,7 +9,7 @@ class CodeClubApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@CodeClubApplication)
-            modules(viewModelModule, daoImplModule, databaseModule)
+            modules(viewModelModule, daoImplModule, databaseModule, appRetrofit)
         }
     }
 }

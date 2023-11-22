@@ -1,6 +1,4 @@
-package com.example.codeclubapp.src.retrofit.modelosResposta
-
-import com.google.gson.annotations.SerializedName
+package com.example.codeclubapp.src.retrofit.dto
 
 data class CodeClubs (
     var address         : Address?                  = Address(),
