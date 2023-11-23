@@ -11,14 +11,18 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codeclubapp.databinding.ActivitySignUp01Binding
 import com.example.codeclubapp.src.classesModelos.user.Address
-import com.example.codeclubapp.src.classesModelos.user.AvaiableTime
+import com.example.codeclubapp.src.classesModelos.user.RoomDBAvaiableTime
 import com.example.codeclubapp.src.classesModelos.user.Contacts
-import com.example.codeclubapp.src.classesModelos.user.DAYS
+import com.example.codeclubapp.src.retrofit.dto.DAYS
 import com.example.codeclubapp.src.classesModelos.user.Knowledges
 import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
+import com.example.codeclubapp.src.retrofit.dto.user.AvailableTime
+import com.example.codeclubapp.src.retrofit.dto.user.CreateUser
+import com.example.codeclubapp.src.retrofit.dto.user.UserOutput
 import com.example.codeclubapp.src.ui.viewmodel.SignUpViewModel
 import com.example.codeclubapp.src.utils.CC_Utils
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDateTime
 
 private const val TAG = "SignUp01"
 
@@ -55,10 +59,16 @@ class SignUp01 : AppCompatActivity() {
 
         //Definindo qual estado foi selecionado pelo usuário
         stateSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val estadoSelecionado = estados[position]
-                stateSelected = estadoSelecionado
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val state = estados[position]
+                stateSelected = state
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
@@ -74,7 +84,10 @@ class SignUp01 : AppCompatActivity() {
             email = binding.editTextEmail.text.toString()
             password = binding.editTextSenha.text.toString()
 
-            Log.i(TAG, " Salvando usuario de nome: $name $lastName e city: $city  e estado $stateSelected")
+            Log.i(
+                TAG,
+                " Salvando localmente usuario de nome: $name $lastName e city: $city  e estado $stateSelected"
+            )
 
             //Cadastrar usuário se os formulários forem válidos
             if (validaFormulario(
@@ -89,6 +102,48 @@ class SignUp01 : AppCompatActivity() {
                     knowledges
                 )
             ) {
+                val availableTime = listOf<AvailableTime>(
+                    AvailableTime(
+                        LocalDateTime.now().toString(),
+                        LocalDateTime.now().toString(),
+                        DAYS.MONDAY.name,
+                    )
+                )
+
+                val knowledges = listOf<String>(
+                    knowledges
+                )
+
+
+                val phones = listOf<String>(
+                    tels
+                )
+
+                var createUser = CreateUser(
+                    true, availableTime,
+                    city, LocalDateTime.now().toString(),
+                    email, knowledges,
+                    lastName, name, neighborhood,
+                    password, stateSelected, phones,
+                    LocalDateTime.now().toString(), name
+                )
+                signUpViewModel.createNewUserAPI(createUser).also {
+                    signUpViewModel.createUserSuccess.observe(this@SignUp01) { success ->
+                        if (!success) {
+                            CC_Utils.showToast(this@SignUp01, "Falha ao cadastrar usuário")
+                        } else {
+                            signUpViewModel.userOutput.observe(this@SignUp01) {
+                                CC_Utils.showToast(this@SignUp01, "Usuário cadastrado com sucesso!")
+                                Log.i(
+                                    TAG,
+                                    "Salvando remotamente de nome: ${it.name}"
+                                )
+                            }
+                        }
+                    }
+                }
+
+
                 CC_Utils.showToast(this, "Usuario $name cadastrado com sucesso")
 
                 saveUserOnDatabase(
@@ -100,7 +155,7 @@ class SignUp01 : AppCompatActivity() {
                     neighborhood,
                     tels,
                     email,
-                    knowledges
+                    knowledges.toString()
                 )
             }
         }
@@ -170,7 +225,7 @@ class SignUp01 : AppCompatActivity() {
     ) {
         val userAddress = Address(city, state, neighborhood)
         val userContacts = Contacts(tels, email)
-        val avaiableTime = AvaiableTime(
+        val roomDBAvaiableTime = RoomDBAvaiableTime(
             DAYS.MONDAY,
             System.currentTimeMillis(),
             System.currentTimeMillis()
@@ -182,13 +237,11 @@ class SignUp01 : AppCompatActivity() {
             password = password,
             address = userAddress,
             contacts = userContacts,
-            avaiableTime = avaiableTime,
+            roomDBAvaiableTime = roomDBAvaiableTime,
             knowledges = Knowledges(knowledges)
         )
         signUpViewModel.insertNewUser(user)
     }
-
-
 
 
 }

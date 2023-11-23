@@ -21,7 +21,7 @@ class Login : AppCompatActivity() {
 
 //        val userCodeClubA = UserCodeClub(name = "Pedro", password = "1234")
 //        val userCodeClubB = UserCodeClub(name = "William", password = "1234")
-//        val listaLoginFake = mutableListOf<UserCodeClub>(UserCodeClub())
+//        val listaLoginFake = mutsableListOf<UserCodeClub>(UserCodeClub())
 //
 //
 //        listaLoginFake.addAll(listOf(userCodeClubA, userCodeClubB))

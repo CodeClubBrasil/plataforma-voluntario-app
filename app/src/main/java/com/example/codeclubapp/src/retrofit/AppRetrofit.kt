@@ -5,10 +5,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class AppRetrofit {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("inserir_URL_base")
+        .baseUrl("https://plataforma-voluntario-api.vercel.app/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val Service = retrofit.create(Service::class.java)
-
 }
