@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
+import com.example.codeclubapp.src.db.entities.RoomUser
 import com.example.codeclubapp.src.db.user.UserDaoImpl
 import com.example.codeclubapp.src.retrofit.AppRetrofit
 import com.example.codeclubapp.src.retrofit.dto.user.CreateUser
@@ -26,9 +26,9 @@ class SignUpViewModel(private val userDaoImpl: UserDaoImpl, private val appRetro
     private var _userOutput = MutableLiveData<UserOutput>()
     val userOutput: LiveData<UserOutput> = _userOutput
 
-    fun insertNewUser(userCodeClub: UserCodeClub) {
+    fun insertNewUserOnRoomDB(roomUser: RoomUser) {
         CoroutineScope(Dispatchers.IO).launch {
-            userDaoImpl.insertNewUser(userCodeClub)
+            userDaoImpl.insertNewUser(roomUser)
         }
     }
 

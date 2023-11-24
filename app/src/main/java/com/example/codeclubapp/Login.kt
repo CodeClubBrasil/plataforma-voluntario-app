@@ -8,7 +8,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import com.example.codeclubapp.databinding.ActivityLoginBinding
-import com.example.codeclubapp.src.classesModelos.user.UserCodeClub
 
 private const val TAG = "TAG"
 class Login : AppCompatActivity() {
