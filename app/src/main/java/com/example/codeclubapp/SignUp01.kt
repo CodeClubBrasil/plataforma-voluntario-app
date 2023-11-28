@@ -30,11 +30,11 @@ class SignUp01 : AppCompatActivity() {
     private lateinit var binding: ActivitySignUp01Binding
     private var byteArrayImg: ByteArray? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUp01Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        val isConnectedOnNetwork = CCUtils.checkConnectivity(this)
 
         //Lidando com o array de Estados
         val stateSpinner = binding.stateSpinner
@@ -81,67 +81,97 @@ class SignUp01 : AppCompatActivity() {
             email = binding.editTextEmail.text.toString()
             password = binding.editTextSenha.text.toString()
 
-            val availableTime = listOf<AvailableTime>(
-                AvailableTime(
-                    LocalDateTime.now().toString(),
-                    LocalDateTime.now().toString(),
-                    DAYS.MONDAY.name,
-                )
+            val (roomAvaiableTime, createUser) = creatingUser(
+                knowledges,
+                tels,
+                city,
+                email,
+                lastName,
+                name,
+                neighborhood,
+                password,
+                stateSelected
             )
 
-            val roomAvaiableTime = RoomAvaiableTime(
-                availableTime[0].time_end,
-                availableTime[0].time_start,
-                availableTime[0].week_day,
-            )
-
-            val knowledgesList = listOf<String>(
-                knowledges
-            )
-
-
-            val phones = listOf<String>(
-                tels
-            )
-
-            val createUser = CreateUser(
-                true, availableTime,
-                city, LocalDateTime.now().toString(),
-                email, knowledgesList,
-                lastName, name, neighborhood,
-                password, stateSelected, phones,
-                LocalDateTime.now().toString(), name
-            )
-            signUpViewModel.createNewUserAPI(createUser).also {
-                signUpViewModel.createUserSuccess.observe(this@SignUp01) { success ->
-                    if (!success) {
-                        CCUtils.showToast(this@SignUp01, "Falha ao cadastrar usuário")
-                        Log.i(TAG, "Falha ao salvar usuario")
-                    } else {
-                        signUpViewModel.userOutput.observe(this@SignUp01) { _ ->
-                            CCUtils.showToast(this@SignUp01, "Usuário cadastrado com sucesso!")
-                            Log.i(TAG, "Usuario salvo API")
-                            saveUserOnDatabase(
-                                createUser.active, roomAvaiableTime,
-                                createUser.city, createUser.created_at, createUser.email,
-                                knowledges, createUser.last_name, createUser.name,
-                                createUser.neighborhood, createUser.password, createUser.state,
-                                tels, createUser.created_at, createUser.name
-                            )
-                            Log.i(TAG, "Usuario salvo Room")
-                            CCUtils.showToast(this@SignUp01, "Usuário salvo room com sucesso!")
-                        }
-                    }
-                }
+            if (isConnectedOnNetwork) {
+                creatingUserOnApi(createUser)
             }
-
-
+            saveUserOnDatabase(
+                createUser.active, roomAvaiableTime,
+                createUser.city, createUser.created_at, createUser.email,
+                knowledges, createUser.last_name, createUser.name,
+                createUser.neighborhood, createUser.password, createUser.state,
+                tels, createUser.created_at, createUser.name, !isConnectedOnNetwork
+            )
         }
 
         val entrar = binding.botaoEntrar
         entrar.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
+    }
+
+    private fun creatingUserOnApi(
+        createUser: CreateUser
+    ) {
+        signUpViewModel.createNewUserAPI(createUser).also {
+            signUpViewModel.createUserSuccess.observe(this@SignUp01) { success ->
+                if (!success) {
+                    CCUtils.showToast(this@SignUp01, "Falha ao cadastrar usuário")
+                    Log.i(TAG, "Falha ao salvar usuario")
+                } else {
+                    signUpViewModel.userOutput.observe(this@SignUp01) { _ ->
+                        CCUtils.showToast(this@SignUp01, "Usuário cadastrado com sucesso!")
+                        Log.i(TAG, "Usuario salvo API")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun creatingUser(
+        knowledges: String,
+        tels: String,
+        city: String,
+        email: String,
+        lastName: String,
+        name: String,
+        neighborhood: String,
+        password: String,
+        stateSelected: String
+    ): Pair<RoomAvaiableTime, CreateUser> {
+        val availableTime = listOf<AvailableTime>(
+            AvailableTime(
+                LocalDateTime.now().toString(),
+                LocalDateTime.now().toString(),
+                DAYS.MONDAY.name,
+            )
+        )
+
+        val roomAvaiableTime = RoomAvaiableTime(
+            availableTime[0].time_end,
+            availableTime[0].time_start,
+            availableTime[0].week_day,
+        )
+
+        val knowledgesList = listOf<String>(
+            knowledges
+        )
+
+
+        val phones = listOf<String>(
+            tels
+        )
+
+        val createUser = CreateUser(
+            true, availableTime,
+            city, LocalDateTime.now().toString(),
+            email, knowledgesList,
+            lastName, name, neighborhood,
+            password, stateSelected, phones,
+            LocalDateTime.now().toString(), name
+        )
+        return Pair(roomAvaiableTime, createUser)
     }
 
     private fun validaFormulario(
@@ -167,7 +197,6 @@ class SignUp01 : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveUserOnDatabase(
         active: Boolean,
         availableTime: RoomAvaiableTime,
@@ -182,13 +211,17 @@ class SignUp01 : AppCompatActivity() {
         state: String,
         telephone: String,
         updatedAt: String,
-        userName: String
+        userName: String,
+        needToBePersisted: Boolean
     ) {
         val user = RoomUser(
             0, active, city, createdAt, email, knowLedges, lastName,
-            neighborhood, password, state, telephone, updatedAt, userName, name, availableTime
+            neighborhood, password, state, telephone, updatedAt, userName, name, availableTime,
+            needToBePersisted
         )
-        signUpViewModel.insertNewUserOnRoomDB(user)
+        signUpViewModel.insertNewUserOnRoomDB(user).also {
+            Log.i(TAG, "Usuario salvo Room")
+        }
     }
 
 

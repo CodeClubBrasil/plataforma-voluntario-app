@@ -20,5 +20,6 @@ data class RoomUser(
     var updatedat: String,
     var username: String,
     var name: String? = null,
-    @Embedded var roomAvaiableTime: RoomAvaiableTime?
+    @Embedded var roomAvaiableTime: RoomAvaiableTime?,
+    var needToBePersisted:Boolean
 )
