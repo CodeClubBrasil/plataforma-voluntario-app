@@ -17,6 +17,5 @@ class Logado : AppCompatActivity() {
         val editarperfil: Button = findViewById(R.id.buttonEditarPerfil)
         editarperfil.setOnClickListener { val intent = Intent(this,Perfil::class.java)
         startActivity(intent)}
-
     }
 }
