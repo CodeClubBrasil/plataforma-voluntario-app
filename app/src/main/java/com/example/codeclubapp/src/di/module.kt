@@ -4,6 +4,8 @@ import androidx.room.Room
 import com.example.codeclubapp.src.db.DatabaseManager
 import com.example.codeclubapp.src.db.user.UserDaoImpl
 import com.example.codeclubapp.src.retrofit.AppRetrofit
+import com.example.codeclubapp.src.retrofit.WebClient
+import com.example.codeclubapp.src.ui.viewmodel.MainActivityViewModel
 import com.example.codeclubapp.src.ui.viewmodel.SignUpViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -25,6 +27,10 @@ val viewModelModule = module {
     viewModel {
         SignUpViewModel(get(), get())
     }
+
+    viewModel {
+        MainActivityViewModel(get(), get())
+    }
 }
 
 val daoImplModule = module {
@@ -36,5 +42,11 @@ val daoImplModule = module {
 val appRetrofit = module {
     single<AppRetrofit> {
         AppRetrofit()
+    }
+}
+
+val webClient = module {
+    single {
+        WebClient()
     }
 }

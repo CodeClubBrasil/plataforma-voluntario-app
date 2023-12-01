@@ -6,25 +6,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.codeclubapp.src.db.entities.RoomUser
 import com.example.codeclubapp.src.db.user.UserDaoImpl
-import com.example.codeclubapp.src.retrofit.AppRetrofit
+import com.example.codeclubapp.src.retrofit.WebClient
 import com.example.codeclubapp.src.retrofit.dto.user.CreateUser
 import com.example.codeclubapp.src.retrofit.dto.user.UserOutput
+import com.example.codeclubapp.src.retrofit.user.UserAPI
 import com.example.codeclubapp.src.utils.CCUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignUpViewModel(private val userDaoImpl: UserDaoImpl, private val appRetrofit: AppRetrofit) :
+class SignUpViewModel(private val userDaoImpl: UserDaoImpl, private val appRetrofit: WebClient) :
     ViewModel() {
 
     private var _byteArrayImg = MutableLiveData<ByteArray>()
     val byteArrayImg: LiveData<ByteArray> = _byteArrayImg
 
-    private var _createUserSuccess = MutableLiveData<Boolean>()
-    val createUserSuccess: LiveData<Boolean> = _createUserSuccess
+    private var _createUserSuccess = MutableLiveData<Boolean?>()
+    val createUserSuccess: LiveData<Boolean?> = _createUserSuccess
 
-    private var _userOutput = MutableLiveData<UserOutput>()
-    val userOutput: LiveData<UserOutput> = _userOutput
+    private var _userOutput = MutableLiveData<UserOutput?>()
+    val userOutput: LiveData<UserOutput?> = _userOutput
 
     fun insertNewUserOnRoomDB(roomUser: RoomUser) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -32,11 +33,13 @@ class SignUpViewModel(private val userDaoImpl: UserDaoImpl, private val appRetro
         }
     }
 
-    fun createNewUserAPI(createUser: CreateUser) {
+    fun createNewUserAPI(createUser: UserAPI) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = appRetrofit.Service.createUser(createUser)
-            _createUserSuccess.postValue(result.isSuccessful)
-            _userOutput.postValue(result.body())
+            appRetrofit.insertUser(createUser).also {
+                _createUserSuccess.postValue(it.first)
+                _userOutput.postValue(it.second)
+            }
+
         }
     }
 

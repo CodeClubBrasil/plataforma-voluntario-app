@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
+            android:id="@+id/cadastro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:backgroundTint="#070707"
+            android:backgroundTint="#FFFFFF"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/textCadastro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
                 android:text="@string/cadastro"
                 android:textColor="@color/black"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.108"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/editTextNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:autofillHints="name"
+                android:ems="7"
+                android:hint="@string/espacoNome"
+                android:inputType="textPersonName"
+                android:text="Valter"
+                android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editTextNome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints="name"
-                    android:ems="7"
-                    android:hint="@string/espacoNome"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextCidade"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <EditText
-                    android:id="@+id/editTextSobrenome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints="surname"
-                    android:ems="7"
-                    android:hint="@string/espacoSobrenome"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextCidade"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </LinearLayout>
-
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/editTextSobrenome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:autofillHints="surname"
+                android:ems="7"
+                android:hint="@string/espacoSobrenome"
+                android:inputType="textPersonName"
+                android:text="Gabriel"
+                android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/editTextCidade"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:autofillHints="addressCity"
-                    android:ems="7"
-                    android:hint="@string/espacoCidade"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextBairro"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/editTextNickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:autofillHints="nickname"
+                android:ems="15"
+                android:hint="Nickname"
+                android:inputType="textPersonName"
+                android:textSize="20sp" />
 
-                <Spinner
-                    android:id="@+id/stateSpinner"
-                    android:layout_width="186dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:backgroundTint="#000000"
-                    android:contentDescription="@string/spinnerEstado"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextBairro"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </LinearLayout>
+            <EditText
+                android:id="@+id/editTextCidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:autofillHints="addressCity"
+                android:ems="7"
+                android:hint="@string/espacoCidade"
+                android:inputType="textPersonName"
+                android:text="Castanhal"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/stateSpinner"
+                android:layout_width="186dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#000000"
+                android:contentDescription="@string/spinnerEstado"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toTopOf="@+id/editTextBairro"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <EditText
                 android:id="@+id/editTextBairro"
@@ -118,6 +118,7 @@
                 android:ems="15"
                 android:hint="@string/bairro"
                 android:inputType="textPersonName"
+                android:text="Milahre"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextTelefone"
@@ -135,6 +136,7 @@
                 android:ems="15"
                 android:hint="@string/espacoTelefone"
                 android:inputType="phone"
+                android:text="919876546"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
@@ -152,12 +154,12 @@
                 android:ems="15"
                 android:hint="@string/conhecimento"
                 android:inputType="textPersonName"
+                android:text="java e kotlin"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextTelefone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
 
             <EditText
                 android:id="@+id/editTextEmail"
@@ -170,6 +172,7 @@
                 android:ems="15"
                 android:hint="@string/espacoEmail"
                 android:inputType="textEmailAddress"
+                android:text="email@gmail.com"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextSenha"
@@ -187,92 +190,36 @@
                 android:ems="15"
                 android:hint="@string/espacoSenha"
                 android:inputType="textPassword"
+                android:text="1234"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/btnContinueToSignUp02"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-
             <Button
                 android:id="@+id/btnContinueToSignUp02"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/botaoContinuar"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-
-            <Button
-                android:id="@+id/btnFotoTeste"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:text="@string/btnFotoTeste"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:id="@+id/imgTeste"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/txtByteArray"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="BYTE ARRAY" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textTermos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:text="@string/termosCondicoes"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
-                    app:layout_constraintEnd_toStartOf="@+id/textTermosCondicoes"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/textTermosCondicoes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/termosCondicoes2"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/botaoEntrar"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/textTermos" />
-            </LinearLayout>
-
         </LinearLayout>
 
-        <Button
-            android:id="@+id/botaoEntrar"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:text="@string/botaoEntrar"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/botaoEntrar"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:text="@string/botaoEntrar"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

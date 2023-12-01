@@ -25,4 +25,12 @@ class UserDaoImpl(private val databaseManager: DatabaseManager) : UserCodeClubeD
     override fun deleteUserByNickname(username: String) {
         TODO("Not yet implemented")
     }
+
+    override fun getAll(): List<RoomUser> {
+        return userDAO.getAll();
+    }
+
+    override fun updateRoomUser(roomUser: RoomUser) {
+        userDAO.updateRoomUser(roomUser)
+    }
 }

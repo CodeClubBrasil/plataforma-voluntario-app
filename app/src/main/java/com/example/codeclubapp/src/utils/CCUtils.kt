@@ -40,5 +40,10 @@ class CCUtils {
             val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
             return activeNetwork?.isConnectedOrConnecting == true
         }
+
+        fun stringToListOfString(str:String):List<String>{
+            return listOf(str)
+        }
+
     }
 }

@@ -1,20 +1,18 @@
 package com.example.codeclubapp
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.codeclubapp.databinding.ActivitySignUp01Binding
 import com.example.codeclubapp.src.db.entities.RoomAvaiableTime
 import com.example.codeclubapp.src.retrofit.dto.DAYS
 import com.example.codeclubapp.src.db.entities.RoomUser
-import com.example.codeclubapp.src.retrofit.dto.user.AvailableTime
-import com.example.codeclubapp.src.retrofit.dto.user.CreateUser
+import com.example.codeclubapp.src.retrofit.user.AvailableTime
+import com.example.codeclubapp.src.retrofit.user.UserAPI
 import com.example.codeclubapp.src.ui.viewmodel.SignUpViewModel
 import com.example.codeclubapp.src.utils.CCUtils
 import com.example.codeclubapp.src.utils.ValidateFields
@@ -68,41 +66,50 @@ class SignUp01 : AppCompatActivity() {
         var knowledges = ""
         var email = ""
         var password = ""
+        var username = ""
 
         //Botão CADASTRAR clicado
         binding.btnContinueToSignUp02.setOnClickListener {
-            //Atualizando variáveis para o que foi digitado pelo usuário
-            name = binding.editTextNome.text.toString()
-            lastName = binding.editTextSobrenome.text.toString()
-            city = binding.editTextCidade.text.toString()
-            neighborhood = binding.editTextBairro.text.toString()
-            tels = binding.editTextTelefone.text.toString()
-            knowledges = binding.editTextKnowledge.text.toString()
-            email = binding.editTextEmail.text.toString()
-            password = binding.editTextSenha.text.toString()
 
-            val (roomAvaiableTime, createUser) = creatingUser(
-                knowledges,
-                tels,
-                city,
-                email,
-                lastName,
-                name,
-                neighborhood,
-                password,
-                stateSelected
+            //Atualizando variáveis para o que foi digitado pelo usuário
+            name = binding.editTextNome.text.toString().trim()
+            lastName = binding.editTextSobrenome.text.toString().trim()
+            city = binding.editTextCidade.text.toString().trim()
+            neighborhood = binding.editTextBairro.text.toString().trim()
+            tels = binding.editTextTelefone.text.toString().trim()
+            knowledges = binding.editTextKnowledge.text.toString().trim()
+            email = binding.editTextEmail.text.toString().trim()
+            password = binding.editTextSenha.text.toString().trim()
+            username = binding.editTextNickname.text.toString().trim()
+
+            val availableTime = generateAvailableTime()
+            val roomAvaiableTime = roomAvailableTime(availableTime)
+            val knowledgesList = CCUtils.stringToListOfString(knowledges)
+            val phones = CCUtils.stringToListOfString(tels)
+
+            val userApi = UserAPI(
+                true, availableTime,
+                city, LocalDateTime.now().toString(),
+                email, knowledgesList,
+                lastName, name, neighborhood,
+                password, "PA", phones,
+                username
             )
+
+            validaFormulario(name,lastName,password,city,stateSelected,neighborhood,tels, email, knowledges)
 
             if (isConnectedOnNetwork) {
-                creatingUserOnApi(createUser)
+                creatingUserOnApi(userApi, roomAvaiableTime, knowledges, tels)
+            }else{
+                saveUserOnDatabase(
+                    userApi.active, roomAvaiableTime,
+                    userApi.city, userApi.created_at, userApi.email,
+                    knowledges, userApi.last_name, userApi.name,
+                    userApi.neighborhood, userApi.password, userApi.state,
+                    tels, userApi.created_at, userApi.name, true
+                )
             }
-            saveUserOnDatabase(
-                createUser.active, roomAvaiableTime,
-                createUser.city, createUser.created_at, createUser.email,
-                knowledges, createUser.last_name, createUser.name,
-                createUser.neighborhood, createUser.password, createUser.state,
-                tels, createUser.created_at, createUser.name, !isConnectedOnNetwork
-            )
+
         }
 
         val entrar = binding.botaoEntrar
@@ -112,66 +119,49 @@ class SignUp01 : AppCompatActivity() {
     }
 
     private fun creatingUserOnApi(
-        createUser: CreateUser
+        createUser: UserAPI,
+        roomAvaiableTime:RoomAvaiableTime,
+        knowledges:String,
+        tels:String
     ) {
         signUpViewModel.createNewUserAPI(createUser).also {
             signUpViewModel.createUserSuccess.observe(this@SignUp01) { success ->
-                if (!success) {
+                if (!success!!) {
                     CCUtils.showToast(this@SignUp01, "Falha ao cadastrar usuário")
-                    Log.i(TAG, "Falha ao salvar usuario")
+                    Log.i(TAG, "Falha ao cadastrar usuario")
                 } else {
                     signUpViewModel.userOutput.observe(this@SignUp01) { _ ->
-                        CCUtils.showToast(this@SignUp01, "Usuário cadastrado com sucesso!")
-                        Log.i(TAG, "Usuario salvo API")
+                        saveUserOnDatabase(
+                            createUser.active, roomAvaiableTime,
+                            createUser.city, createUser.created_at, createUser.email,
+                            knowledges, createUser.last_name, createUser.name,
+                            createUser.neighborhood, createUser.password, createUser.state,
+                            tels, createUser.created_at, createUser.name, true
+                        )
                     }
                 }
             }
         }
     }
 
-    private fun creatingUser(
-        knowledges: String,
-        tels: String,
-        city: String,
-        email: String,
-        lastName: String,
-        name: String,
-        neighborhood: String,
-        password: String,
-        stateSelected: String
-    ): Pair<RoomAvaiableTime, CreateUser> {
-        val availableTime = listOf<AvailableTime>(
-            AvailableTime(
-                LocalDateTime.now().toString(),
-                LocalDateTime.now().toString(),
-                DAYS.MONDAY.name,
-            )
-        )
-
-        val roomAvaiableTime = RoomAvaiableTime(
+    private fun roomAvailableTime(availableTime:List<AvailableTime>): RoomAvaiableTime {
+        return RoomAvaiableTime(
             availableTime[0].time_end,
             availableTime[0].time_start,
             availableTime[0].week_day,
         )
+    }
 
-        val knowledgesList = listOf<String>(
-            knowledges
+
+    private fun generateAvailableTime(): List<AvailableTime> {
+        val availableTime = listOf<AvailableTime>(
+            AvailableTime(
+                "2023-12-01T22:25:23.069Z",
+                "2023-12-01T22:25:23.069Z",
+                DAYS.MONDAY.name,
+            )
         )
-
-
-        val phones = listOf<String>(
-            tels
-        )
-
-        val createUser = CreateUser(
-            true, availableTime,
-            city, LocalDateTime.now().toString(),
-            email, knowledgesList,
-            lastName, name, neighborhood,
-            password, stateSelected, phones,
-            LocalDateTime.now().toString(), name
-        )
-        return Pair(roomAvaiableTime, createUser)
+        return availableTime
     }
 
     private fun validaFormulario(
@@ -215,9 +205,9 @@ class SignUp01 : AppCompatActivity() {
         needToBePersisted: Boolean
     ) {
         val user = RoomUser(
-            0, active, city, createdAt, email, knowLedges, lastName,
+            123, active, city, createdAt, email, knowLedges, lastName,
             neighborhood, password, state, telephone, updatedAt, userName, name, availableTime,
-            needToBePersisted
+            needToBePersisted, false
         )
         signUpViewModel.insertNewUserOnRoomDB(user).also {
             Log.i(TAG, "Usuario salvo Room")
