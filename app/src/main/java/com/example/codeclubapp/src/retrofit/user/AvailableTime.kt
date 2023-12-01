@@ -1,4 +1,4 @@
-package com.example.codeclubapp.src.retrofit.dto.user
+package com.example.codeclubapp.src.retrofit.user
 
 data class AvailableTime(
     val time_end: String,
