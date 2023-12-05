@@ -96,11 +96,21 @@ class SignUp01 : AppCompatActivity() {
                 username
             )
 
-            validaFormulario(name,lastName,password,city,stateSelected,neighborhood,tels, email, knowledges)
+            validaFormulario(
+                name,
+                lastName,
+                password,
+                city,
+                stateSelected,
+                neighborhood,
+                tels,
+                email,
+                knowledges
+            )
 
             if (isConnectedOnNetwork) {
                 creatingUserOnApi(userApi, roomAvaiableTime, knowledges, tels)
-            }else{
+            } else {
                 saveUserOnDatabase(
                     userApi.active, roomAvaiableTime,
                     userApi.city, userApi.created_at, userApi.email,
@@ -109,6 +119,8 @@ class SignUp01 : AppCompatActivity() {
                     tels, userApi.created_at, userApi.name, true
                 )
             }
+
+            startActivity(Intent(this, SingUp02::class.java))
 
         }
 
@@ -120,9 +132,9 @@ class SignUp01 : AppCompatActivity() {
 
     private fun creatingUserOnApi(
         createUser: UserAPI,
-        roomAvaiableTime:RoomAvaiableTime,
-        knowledges:String,
-        tels:String
+        roomAvaiableTime: RoomAvaiableTime,
+        knowledges: String,
+        tels: String
     ) {
         signUpViewModel.createNewUserAPI(createUser).also {
             signUpViewModel.createUserSuccess.observe(this@SignUp01) { success ->
@@ -144,7 +156,7 @@ class SignUp01 : AppCompatActivity() {
         }
     }
 
-    private fun roomAvailableTime(availableTime:List<AvailableTime>): RoomAvaiableTime {
+    private fun roomAvailableTime(availableTime: List<AvailableTime>): RoomAvaiableTime {
         return RoomAvaiableTime(
             availableTime[0].time_end,
             availableTime[0].time_start,
