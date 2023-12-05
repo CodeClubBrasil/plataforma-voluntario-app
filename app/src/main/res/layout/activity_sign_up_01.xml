@@ -207,19 +207,16 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/botaoEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/botaoEntrar"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
         </LinearLayout>
 
     </ScrollView>
-
-    <Button
-        android:id="@+id/botaoEntrar"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:text="@string/botaoEntrar"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
